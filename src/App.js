@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useEffect } from 'react';
+import {API, setAuthToken} from './Config/Api';
+import { UserContext } from './Context/UserContext';
+import Routes from '../src/Routes'
+import { useNavigate } from 'react-router-dom';
+if(localStorage.token) {
+    setAuthToken(localStorage.token)
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let navigate = useNavigate();
+    const [state, dispatch] = useContext(UserContext)
+
+    useEffect(() => {        
+        if(localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
+        if(state.isLogin === false){
+            navigate("/");
+        }
+    }, [state])
+
+    const checkUser = async () => {
+        try {
+        const config = {
+            Headers: {
+                "Content-type" : "aplication/json"
+            }
+        }
+        const response = await API.get("/check-auth",config);
+
+        if (response.status === 404) {
+            dispatch({
+                type: "AUTH_ERROR",
+            });
+        }
+
+        let payload = response.data.data;
+        payload.token = localStorage.token;
+        
+        dispatch({
+            type: "USER_SUCCESS",
+            payload,
+        });
+        } catch (error) {
+           console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        checkUser();
+    }, []);
+
+
+
+    return (
+        <Routes />
+    );
 }
 
 export default App;
