@@ -21,8 +21,8 @@ const modalStyles = {
         paddingRight:0,
         top: '106px',
         left: '33%',
-        width : '417px',
-        height : '385px',
+        width : '380px',
+        height : '260px',
         backgroundColor: '#1F1F1F',
         paddingLeft: '20px',
         paddingRight: '20px',
@@ -114,8 +114,8 @@ function LoginModal(props) {
                             loading={loading}
                         />
                     </div>
-                    <div className="link">
-                        <p onClick={() => toRegister()}>Don't have an account ? Klik <span>Here</span></p>
+                    <div style={{color: '#ffffff', textAlign: 'center',marginTop: 15}}>
+                        <p style={{cursor: 'pointer'}}  onClick={() => toRegister()}>Don't have an account ? Klik <span>Here</span></p>
                     </div>
                 </form>
             </div>
