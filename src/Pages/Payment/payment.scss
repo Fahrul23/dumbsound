@@ -1,26 +1,57 @@
-.payment{
-    flex: 1;
+.payment-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100%;
-    padding-top: 150px;
-    .title {
-        h2 {
-            font-size: 32px;
-            color: white;
-            font-weight: 800;
+    padding-top: 100px;
+    color: #ffffff;
+    .payment {
+        h4 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
         }
-    }
-    .description {
+        text-align: center;
+        .app-name {
+            margin-left: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #EE4622;
+            span {
+                color: #ffffff;
+            }
+        }
         .desc {
-            font-size: 18;
-            color: white
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 50px;
         }
         .contact {
-            font-size: 20;
-            color: white
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .number {
+                margin-left: 5px;
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+        .form-payment {
+            padding: 10px 145px;
+            .img-preview {
+                margin-left: 60px;
+                width: 150px;
+                margin-top: 15px;
+                border: 1px solid #ffffff;
+                height: 150px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .submit {
+                margin-top: 20px;
+            }
         }
     }
 }
