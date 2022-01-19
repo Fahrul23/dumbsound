@@ -6,12 +6,6 @@ import Button from '../../Component/Button';
 
 export default function Payment() {
     
-    const handleChange = (e) => {
-        setForm({
-          ...form,
-          [e.target.name]: e.target.type === "file" ? e.target.files : e.target.value,
-        });
-    }
     return (
         <div>
             <Navbar />

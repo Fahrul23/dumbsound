@@ -42,9 +42,12 @@ export default function Navbar() {
     return (
         <div className="navbar">
             <div className="logo">
-                <a href="/">
+                <Link to="/">
                     <img src={logo} alt="logo" />
-                </a>
+                </Link>
+                <Link to="/">
+                    <h4>Dumb<span>Sound</span></h4>
+                </Link>
             </div>
             <div className="nav-item">
             {state.isLogin === false ?  

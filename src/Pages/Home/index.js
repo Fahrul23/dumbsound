@@ -1,7 +1,8 @@
 import React from 'react'
 // import Banner from '../Component/Banner'
-import Navbar from '../Component/Navbar'
-import Cover from '../../src/assets/image/cover.png'
+import Navbar from '../../Component/Navbar'
+import Cover from '../../assets/image/cover.png'
+import Banner from '../../assets/image/banner.png'
 import './home.scss'
 
 export default function Home() {
@@ -9,11 +10,15 @@ export default function Home() {
         <div>
             <Navbar />
             <div className="banner">
-                <div className="banner-title">
-                    <h2>Connect on DumbSound</h2>
-                </div>
-                <div className="banner-description">
-                    <p>Discovery, Stream, and share a constantly expanding mix of music</p>
+                <img class="banner-image" src={Banner} alt="banner" />
+                <div class="banner-content">
+                    <div class="banner-title">
+                        <h2>Connect on DumbSound</h2>
+                    </div>
+                    <div class="banner-description">
+                        <p>Discovery, Stream, and share a constantly expanding mix of music
+                            from emerging and major artists around the world</p>
+                    </div>
                 </div>
             </div>        
             <div class="music-wrapper">

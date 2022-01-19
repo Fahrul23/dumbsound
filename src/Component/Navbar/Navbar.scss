@@ -8,11 +8,25 @@
     .logo {
         box-sizing: border-box;
         padding: 20px 100px;
-        flex: 1;
+        display: flex;
+        align-items: center;
         img {
             width: 65px;
             height: 45.39px;
-            
+        }
+        a {
+            text-decoration: none;
+        }
+        h4 {
+            padding-left: 15px;
+            font-size: 18px;
+            color: #C32424;
+            text-transform: uppercase;
+            text-shadow: 1px 1.5px 2px black;
+
+        }
+        span {
+            color: #ffffff
         }
     }
     .nav-item {
