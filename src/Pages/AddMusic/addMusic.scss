@@ -1,0 +1,98 @@
+.form-wrapper {
+  padding: 70px 200px;
+  color: #ffffff;
+    h4 {
+      font-size: 36px;
+      font-weight: 700;
+    }
+    .form-music {
+        .form-input {
+            flex: 3;
+            input, select {
+                width: 100%;
+                height: 50px;
+                padding-left: 10px;
+                box-sizing: border-box;
+                font-size: 18px;
+                font-weight: 400;
+                color: #b8b7b7;
+                border-radius: 5px;
+                background: rgba(210, 210, 210, 0.25);
+                border: 2px solid #D2D2D2;
+                box-sizing: border-box;
+            }
+        }
+        .file-input {
+            flex: 1;
+            position: relative;
+            .file {
+                opacity: 0;
+                width: 0.1px;
+                height: 0.1px;
+                position: absolute;
+            }
+            label {
+                text-align: center;
+                display: block;
+                position: relative;
+                height: 50px;
+                font-size: 18px;
+                padding-left: 15px;
+                border-radius: 5px;
+                border: 2px solid #D2D2D2;
+                display: flex;
+                align-items: center;
+                color: #EE4622;
+                font-weight: 700;
+                cursor: pointer;
+                transition: transform .2s ease-out;
+            }
+            .img-file {
+                width: 22px;
+                height: 37px;
+                position: absolute;
+                right: 15px;
+                top: 10px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        .form-input-file {
+            label {
+                width: 120px;
+                padding-left: 50px;
+                text-align: center;
+            }
+            .audio-file {
+                margin-top: 10px;
+                margin-bottom: 30px;
+                h5 {
+                cursor: pointer;
+                }
+                
+            }
+        }
+        .music-file {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: -30px;    
+        }
+        .img-preview {
+            width: 150px;
+            height: 150px;
+            border: 1px solid white;
+            img {
+            width: 100%;
+            height: 100%;
+            }
+        }
+        .submit {
+            margin: auto;       
+            width: 400px;
+        }
+    }
+  }

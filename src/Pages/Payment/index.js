@@ -14,12 +14,6 @@ export default function Payment() {
   const [attache, setAttache] = useState('')
   let navigate = useNavigate();
 
-
-  const [form, setForm] = useState({
-    userId: "",
-    attache: ""
-  })
-
   const handleChange = (e) => {
     if (e.target.type === "file") {
         let url = URL.createObjectURL(e.target.files[0]);

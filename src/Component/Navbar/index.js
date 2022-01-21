@@ -83,6 +83,10 @@ export default function Navbar() {
                             <Link to="/pay">
                                 <p>Pay</p>
                             </Link>
+                            
+                            <Link to="/add-music">
+                                <p>Music</p>
+                            </Link>
                         </div>
                         <div className="line"></div>
                         <div className="item" >
