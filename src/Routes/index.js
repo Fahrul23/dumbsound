@@ -3,7 +3,11 @@ import {
     Routes,
     Route,
   } from "react-router-dom";
+import AddArtist from '../Pages/AddArtist';
+import AddMusic from '../Pages/AddMusic';
+import Artist from '../Pages/Artist';
 import Home from '../Pages/Home';
+import Music from '../Pages/Music';
 import Payment from '../Pages/Payment';
 
 function Router() {
@@ -11,6 +15,11 @@ function Router() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/pay" element={<Payment />} />
+            <Route path="/add-music" element={<AddMusic />} />
+            <Route path="/add-artist" element={<AddArtist />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/artist" element={<Artist />} />
+
         </Routes>
     )
 }

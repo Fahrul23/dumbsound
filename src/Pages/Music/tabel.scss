@@ -1,0 +1,113 @@
+.tabel-wrapper {
+    padding-top: 100px;
+    padding-right: 120px;
+    padding-left: 120px;
+    box-sizing: border-box;
+    .title {
+        margin-bottom: 30px;
+        h4 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #2B2B2B;
+    }
+    thead {
+        tr {
+            background-color: #2B2B2B;
+        }
+    }
+    th {
+        color: #EE4622
+    }
+
+    th, td {
+        text-align: left;
+        padding: 16px;
+        color: #ffffff;
+    }
+    tbody {
+        tr {
+            background-color: #3A3A3A;
+    
+            td.success {
+                color: #0ACF83;
+            }
+            td.pending {
+                color: #F7941E;
+            }
+            td.failed {
+                color: #FF0742;
+            }
+            td {
+                .action {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    margin-left: 10px;
+                    position: relative;
+                    cursor: pointer;
+                    .option {
+                        text-align: center;
+                        border-radius: 10px;
+                        padding: 10px 20px;
+                        background-color: #3A3A3A;
+                        position: absolute;
+                        top: 40px;
+                        transition: 0.5s ease;
+                        right: 0;
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                        p {
+                            cursor: pointer;
+                            font-size: 14px;
+                        }
+                        .success {
+                            color: #0ACF83;
+                        }
+                        .success:hover {
+                            color: #09925e;
+                        }
+                        .failed {
+                            color: #FF0742;
+                        }
+                        .failed:hover {
+                            color: #be0530;
+                        }
+                        .triangle-wrapper {
+                            position: absolute;
+                            top: -17px;
+                            right: 6px;
+                            display: flex;
+                            justify-content: flex-end;
+                            .triangle {
+                                width: 0;
+                                height: 0;
+                                border-style: solid;
+                                border-width: 0 8px 18px 8px;
+                                border-color: transparent transparent #3A3A3A transparent;
+                            }
+                        }
+                        
+                    }
+                    .active {
+                        display: none;
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    tr:nth-child(even) {
+        background-color: #2B2B2B;
+    }
+
+    
+}
