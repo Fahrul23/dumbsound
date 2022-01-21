@@ -14,18 +14,15 @@ const modalStyles = {
     },
     content : {
         borderRadius:'10px',
-        paddingTop: '5px',
         margin : 0,
-        paddingLeft: 0,
-        paddingRight:0,
-        top: '70px',
+        top: '40px',
         left: '33%',
-        width : '417px',
-        height : '560px',
+        width : '380px',
+        height : '490px',
         backgroundColor: '#1F1F1F',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        paddingTop: '25px'
+        paddingLeft: '25px',
+        paddingRight: '25px',
+        paddingTop: '28px',
     }
 }
 
@@ -136,8 +133,8 @@ function RegisterModal(props) {
                         />
                     </div>
                 </form>
-                <div className="link">
-                    <p onClick={toLogin}>Already have an account ? Klik <span>Here</span></p>
+                <div style={{color: '#ffffff', textAlign: 'center',marginTop: 15}}>
+                    <p style={{cursor: 'pointer'}}  onClick={() => toLogin()}>Already have an account ? Klik <span>Here</span></p>
                 </div>
             </div>
         </Modal>
