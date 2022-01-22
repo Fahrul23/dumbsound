@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button';
 import Input from '../../Component/Input';
 import InputFile from '../../Component/Input/InputFile';
+import Navbar from '../../Component/Navbar';
 import { API } from '../../Config/Api';
 import './addMusic.scss'
 
@@ -71,79 +72,82 @@ export default function AddMusic() {
     },[])
 
     return (
-        <div className="form-wrapper">
-            <div className="head-music">
-                <h4>Add Music</h4>
-            </div>
-            <form onSubmit={handleSubmit}>
-                <div className="form-music">
-                    <div className="music-file">
-                        <div className="form-input">
-                            <Input 
-                                type="text" 
-                                name="title" 
-                                placeholder="Title" 
-                                onChange={(e) => setTitle(e.target.value)}
-                            />            
-                        </div>
-                        <InputFile 
-                            name="attache" 
-                            text="Attache Thumbnail"
-                            onChange={handleThumbnail}
-                        />
-                    </div>
-                    {preview && (
-                        <div className="img-preview">
-                            <img src={preview} alt="img-preview" />
-                        </div>
-                    )}
-                    <div className="form-input">
-                        <Input 
-                        type="text" 
-                        name="year" 
-                        placeholder="Year" 
-                        onChange={(e) => setYear(e.target.value)}
-                        />
-                    </div>
-                    <div className="form-input">
-                        <select 
-                            id="standard-select" 
-                            onChange={(e) => setArtistId(e.target.value)}>
-                            {artists.length > 0 ? artists.map(artist => {
-                            return (
-                                    <option value={artist.id}>{artist.name}</option>
-                                )
-                            }) 
-                            :
-                                <option value="Pop">Singer</option>
-                            }
-                        </select>
-                    </div>
-                    <div className="form-input-file">
-                        <div className="file-input">
-                            <input 
-                                type="file" 
-                                id="file" 
-                                className="file" 
-                                onChange={handleAttache}
+        <div>
+            <Navbar theme="dark"/>    
+            <div className="form-wrapper">
+                <div className="head-music">
+                    <h4>Add Music</h4>
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-music">
+                        <div className="music-file">
+                            <div className="form-input">
+                                <Input 
+                                    type="text" 
+                                    name="title" 
+                                    placeholder="Title" 
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />            
+                            </div>
+                            <InputFile 
+                                name="attache" 
+                                text="Attache Thumbnail"
+                                onChange={handleThumbnail}
                             />
-                            <label for="file">Attache</label>
                         </div>
-                        {audioPreview && (
-                            <div className="audio-file">
-                            <h5>{audioPreview}</h5>
+                        {preview && (
+                            <div className="img-preview">
+                                <img src={preview} alt="img-preview" />
                             </div>
                         )}
+                        <div className="form-input">
+                            <Input 
+                            type="text" 
+                            name="year" 
+                            placeholder="Year" 
+                            onChange={(e) => setYear(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-input">
+                            <select 
+                                id="standard-select" 
+                                onChange={(e) => setArtistId(e.target.value)}>
+                                {artists.length > 0 ? artists.map(artist => {
+                                return (
+                                        <option value={artist.id}>{artist.name}</option>
+                                    )
+                                }) 
+                                :
+                                    <option value="Pop">Singer</option>
+                                }
+                            </select>
+                        </div>
+                        <div className="form-input-file">
+                            <div className="file-input">
+                                <input 
+                                    type="file" 
+                                    id="file" 
+                                    className="file" 
+                                    onChange={handleAttache}
+                                />
+                                <label for="file">Attache</label>
+                            </div>
+                            {audioPreview && (
+                                <div className="audio-file">
+                                <h5>{audioPreview}</h5>
+                                </div>
+                            )}
+                        </div>
+                        <div className='submit'>
+                            <Button 
+                            type="submit" 
+                            className="btn btn-full btn-orange" 
+                            text="Add Song"
+                            />
+                        </div>
                     </div>
-                    <div className='submit'>
-                        <Button 
-                        type="submit" 
-                        className="btn btn-full btn-orange" 
-                        text="Add Song"
-                        />
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     )
 }

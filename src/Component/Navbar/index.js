@@ -11,7 +11,7 @@ import {Link} from "react-router-dom"
 
 import './Navbar.scss'
 
-export default function Navbar() {
+export default function Navbar({theme}) {
     const [ModalRegister, setModalRegister] = useState(false)
     const [ModalLogin, setModalLogin] = useState(false)
     const [dropdown, setDropdown] = useState(false)
@@ -40,7 +40,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className="navbar">
+        <div className={`navbar ${theme}`}>
             <div className="logo">
                 <Link to="/">
                     <img src={logo} alt="logo" />
@@ -84,7 +84,7 @@ export default function Navbar() {
                                 <p>Pay</p>
                             </Link>
                             
-                            <Link to="/add-music">
+                            <Link to="/transaction">
                                 <p>Music</p>
                             </Link>
                         </div>

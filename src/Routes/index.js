@@ -9,6 +9,7 @@ import Artist from '../Pages/Artist';
 import Home from '../Pages/Home';
 import Music from '../Pages/Music';
 import Payment from '../Pages/Payment';
+import Transaction from '../Pages/Transaction';
 
 function Router() {
     return (
@@ -19,6 +20,7 @@ function Router() {
             <Route path="/add-artist" element={<AddArtist />} />
             <Route path="/music" element={<Music />} />
             <Route path="/artist" element={<Artist />} />
+            <Route path="/transaction" element={<Transaction />} />
 
         </Routes>
     )
