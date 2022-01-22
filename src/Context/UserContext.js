@@ -16,23 +16,36 @@ const reducer = (state,action) => {
             localStorage.setItem("token", payload.token);
             return {
                 isLogin: true,
-                name: payload.fullName,
-                email: payload.email,
+                user:[ 
+                    {
+                        name: payload.fullName,
+                        email: payload.email,
+                        role: payload.role,
+                        subscribe: payload.subscribe
+                    }
+                ]
+                    
             };
         
         case "USER_SUCCESS":
             localStorage.setItem("token", payload.token);
             return {
                 isLogin: true,
-                name: payload.fullName,
-                email: payload.email,
+                user: [ 
+                    {
+                        name: payload.fullName,
+                        email: payload.email,
+                        role: payload.role,
+                        subscribe: payload.subscribe
+                    }
+                ]
             };
         case "AUTH_ERROR":
         case "LOGOUT":
             localStorage.removeItem("token");
             return {
                 isLogin: false,
-                user: {},
+                user: [],
             };
         default:
             throw new Error();

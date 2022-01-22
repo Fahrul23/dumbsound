@@ -6,6 +6,7 @@ import Button from '../../Button';
 import Alert from '../../Alert';
 import { API } from '../../../Config/Api';
 import { UserContext } from '../../../Context/UserContext';
+import './register.scss'
 
 const modalStyles = { 
     overlay :{
@@ -105,13 +106,17 @@ function RegisterModal(props) {
                         placeholder="Full Name" 
                         onChange={handleChange}
                     />
-                    <Input 
-                        type="text" 
-                        name="gender"
-                        placeholder="Gender" 
-                        onChange={handleChange}
-                    />
-                    
+                    <div className="form-input">
+                        <select 
+                            id="standard-select"
+                            name="gender" 
+                            onChange={handleChange}
+                        >
+                        <option value="#">-- Gender --</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        </select>
+                    </div>
                     <Input 
                         type="number" 
                         name="phone"

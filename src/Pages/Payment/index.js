@@ -80,9 +80,10 @@ export default function Payment() {
                             )}
                             <div className="submit">
                                 <Button 
-                                  type="submit" 
-                                  className="btn btn-full btn-orange" 
-                                  text="Pay"
+                                    type="submit" 
+                                    className="btn btn-full btn-orange" 
+                                    text="Pay"
+                                    loading={loading}
                                 />
                             </div>
                         </div>

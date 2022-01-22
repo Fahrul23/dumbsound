@@ -10,7 +10,7 @@ function Button({type,text,loading,...rest}) {
                 type={type ? type : 'button'}  
                 {...rest}
             >{text}
-            {loading === true && <i class="fas fa-circle-notch fa-spin"></i> } 
+            {loading === true && <i className="fas fa-circle-notch fa-spin"></i> } 
             
             </button>
         </div>

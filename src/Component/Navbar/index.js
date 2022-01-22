@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import profile from '../../assets/image/profile.png';
 import logo from '../../assets/icon/logo.png';
 import Button from '../../Component/Button'
@@ -7,6 +7,8 @@ import RegisterModal from '../Modal/RegisterModal';
 import { UserContext } from '../../Context/UserContext';
 import Bill from '../../assets/icon/bill.png'
 import logout from '../../assets/icon/logout.png'
+import people from '../../assets/icon/people.png'
+import music from '../../assets/icon/music.png'
 import {Link} from "react-router-dom"
 
 import './Navbar.scss'
@@ -39,6 +41,10 @@ export default function Navbar({theme}) {
         setDropdown(false)
     }
 
+    useEffect(() => {
+        console.log(state)
+    },[state])
+
     return (
         <div className={`navbar ${theme}`}>
             <div className="logo">
@@ -51,7 +57,6 @@ export default function Navbar({theme}) {
             </div>
             <div className="nav-item">
             {state.isLogin === false ?  
-
                 <div className="auth">
                     <Button 
                         className="btn btn-medium btn-transparant" 
@@ -76,18 +81,38 @@ export default function Navbar({theme}) {
                         <div className="triangle"></div>
                     </div>
                     <div className="item-wrapper active">
-                        <div className="item">
-                            <div className="icon">
-                                <img src={Bill} alt="bil" />
+                        {state.user.length > 0 ? 
+                            state.user[0].role === "admin" ?
+                            <div>
+                                <div className="item">
+                                    <div className="icon">
+                                        <img src={music} alt="bil" />
+                                    </div>
+                                    <Link to="/add-music">
+                                        <p>Add Music</p>
+                                    </Link>
+                                </div>
+                                <div className="item">
+                                    <div className="icon">
+                                        <img src={people} alt="bil" />
+                                    </div>
+                                    <Link to="/add-artist">
+                                        <p>Add Artist</p>
+                                    </Link>
+                                </div>
                             </div>
-                            <Link to="/pay">
-                                <p>Pay</p>
-                            </Link>
-                            
-                            <Link to="/transaction">
-                                <p>Music</p>
-                            </Link>
-                        </div>
+                            :
+                            <div className="item">
+                                <div className="icon">
+                                    <img src={Bill} alt="bil" />
+                                </div>
+                                <Link to="/pay">
+                                    <p>Pay</p>
+                                </Link>
+                            </div>
+                            :
+                            <div></div>
+                        }
                         <div className="line"></div>
                         <div className="item" >
                             <div className="icon">
