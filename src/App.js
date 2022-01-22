@@ -18,6 +18,13 @@ function App() {
         if(state.isLogin === false){
             navigate("/");
         }
+        if(state.user.length >0) {
+            if(state.user[0].role === "admin"){
+                navigate("/transaction")
+            }else {
+                navigate("/")
+            }
+        }
     }, [state])
 
     const checkUser = async () => {
@@ -49,6 +56,7 @@ function App() {
 
     useEffect(() => {
         checkUser();
+        console.log(state)
     }, []);
 
 

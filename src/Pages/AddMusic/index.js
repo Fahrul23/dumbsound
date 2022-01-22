@@ -140,9 +140,10 @@ export default function AddMusic() {
                         </div>
                         <div className='submit'>
                             <Button 
-                            type="submit" 
-                            className="btn btn-full btn-orange" 
-                            text="Add Song"
+                                type="submit" 
+                                className="btn btn-full btn-orange" 
+                                text="Add Song"
+                                loading={loading}
                             />
                         </div>
                     </div>

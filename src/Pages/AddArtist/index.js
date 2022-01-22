@@ -85,9 +85,10 @@ export default function AddArtist() {
                         </div>
                         <div className='submit'>
                             <Button 
-                            type="submit" 
-                            className="btn btn-full btn-orange" 
-                            text="Add Artist"
+                                type="submit" 
+                                className="btn btn-full btn-orange" 
+                                text="Add Artist"
+                                loading={loading}
                             />
                         </div>
                     </div>
