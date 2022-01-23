@@ -1,11 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import Banner from '../Component/Banner'
-import Navbar from '../../Component/Navbar'
-import Cover from '../../assets/image/cover.png'
-import Banner from '../../assets/image/banner.png'
-import './home.scss'
+import Navbar from '../../Component/Navbar';
+import Cover from '../../assets/image/cover.png';
+import Banner from '../../assets/image/banner.png';
+import {API} from '../../Config/Api';
+import ReactJkMusicPlayer from 'react-jinke-music-player'
+import 'react-jinke-music-player/assets/index.css'
+import './home.scss';
 
 export default function Home() {
+    const [musics, setMusics] = useState([])
+    const [list, setList] = useState([])
+    const [audioList,setAudioList] = useState([])
+    const [play, setPlay] = useState(false)
+
+    const getMusics = async () => {
+        try {
+            let response = await API.get('musics')
+            setMusics(response.data.data)
+            response.data.data.map(music => {    
+                audioList.push(
+                    {
+                        name : music.title,
+                        singer: music.Artist.name,
+                        musicSrc: `http://localhost:5000/uploads/${music.attache}`
+                    }
+                )
+                list.push("hello")
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const options = {
+        theme: "dark",
+        autoPlay: true,
+        audioLists: audioList,
+        toggleMode: false,
+        showDestroy: false,
+        showReload: false,
+        showDownload: false,
+        showLyric: false,
+        drag: false,
+        showThemeSwitch: false,
+        quietUpdate: false,
+        clearPriorAudioLists: true,
+        showMediaSession: true,
+        responsive: false,
+        mode: "full",
+    }
+
+    const onPlayHandler = (title, singer,music) => {
+        setPlay(!play);
+        setPlay(true)
+        const newAudioList= [...audioList]
+        const filterAudio = newAudioList.filter(audio => audio.name !== title )
+        filterAudio.unshift({
+            name: title,
+            singer: singer,
+            musicSrc:`http://localhost:5000/uploads/${music}`
+        })
+        setAudioList(filterAudio)
+    }
+    useEffect(() => {
+        getMusics()
+    },[])
+
     return (
         <div>
             <Navbar />
@@ -26,153 +87,41 @@ export default function Home() {
                     <h4>Dengar dan Rasakan</h4>
                 </div>
                 <div class="music-list">
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
+                    {musics.length > 0 ? musics.map(music => {
+                        return (
+                            <div 
+                                class="card-music" 
+                                onClick={() => onPlayHandler(music.title, music.Artist.name, music.attache) }
+                            >
+                                <div class="card-header">
+                                    <img src={`http://localhost:5000/uploads/${music.thumbnail}`} alt="cover" />
+                                </div>
+                                <div class="card-body">
+                                    <div class="title">
+                                        <p>{music.title}</p>
+                                        <p>{music.year}</p>
+                                    </div>
+                                    <div class="content">
+                                        <p>{music.Artist.name}</p>
+                                        {/* <a href="#"></a> */}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="content">
-                                <p>Rush Man</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Rush Man</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Rush Man</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Joji</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Joji</p>
-                            </div>
-                        </div>
-                    </div>
+                        )
+                    })   
+                        : <div></div>
+                    }
+
                     
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Joji</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Joji</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Joji</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Joji</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-music">
-                        <div class="card-header">
-                            <img src={Cover} alt="cover" />
-                        </div>
-                        <div class="card-body">
-                            <div class="title">
-                                <p>Slow Dancing</p>
-                                <p>2018</p>
-                            </div>
-                            <div class="content">
-                                <p>Joji</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
+            {play === true && 
+                <ReactJkMusicPlayer 
+                    {...options}
+                    onAudioPlay={play}
+                />
+            }
         </div>
     )
 }
