@@ -12,8 +12,10 @@ import music from '../../assets/icon/music.png'
 import {Link} from "react-router-dom"
 
 import './Navbar.scss'
+import useDidMountEffect from '../../Config/useDidMountEffect';
 
-export default function Navbar({theme}) {
+export default function Navbar(props) {
+    const {theme, showLogin} = props
     const [ModalRegister, setModalRegister] = useState(false)
     const [ModalLogin, setModalLogin] = useState(false)
     const [dropdown, setDropdown] = useState(false)
@@ -41,9 +43,13 @@ export default function Navbar({theme}) {
         setDropdown(false)
     }
 
-    useEffect(() => {
-        console.log(state)
-    },[state])
+    const showLoginModal = () => {
+        setModalLogin(true)
+    }
+
+    useDidMountEffect(() => {
+        showLoginModal()
+    },[showLogin])
 
     return (
         <div className={`navbar ${theme}`}>
@@ -130,7 +136,7 @@ export default function Navbar({theme}) {
                 setChange={setChange}
             />
             <LoginModal 
-                isOpen={ModalLogin} 
+                isOpen={ModalLogin}
                 closeModal={closeModalLogin} 
                 showModalRegister={showModalRegister}
                 setChange={setChange}

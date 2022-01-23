@@ -31,7 +31,7 @@ const modalStyles = {
 }
 
 function LoginModal(props) {
-    const {showModalRegister, isOpen, closeModal, setChange} = props
+    const {showModalRegister,isOpen, closeModal, setChange} = props
     const [message, setMessage] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)

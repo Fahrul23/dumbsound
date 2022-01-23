@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import action from '../../assets/icon/action.png'
 import Navbar from '../../Component/Navbar';
 import { API } from '../../Config/Api';
@@ -8,6 +9,8 @@ export default function Music() {
     const [active, setActive] = useState('')
     const [musics, setMusics] = useState([])
     const [change, setChange] = useState(false)
+    let navigate = useNavigate();
+    
     const getMusic = async () => {
         try {
             let response = await API.get('musics')
@@ -24,6 +27,11 @@ export default function Music() {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    
+    const editMusic = (id) => {
+        navigate(`/music/${id}`)
     }
 
     useEffect(()=>{
@@ -72,7 +80,10 @@ export default function Music() {
                                                 <div className="triangle-wrapper">
                                                     <div className="triangle"></div>
                                                 </div>
-                                                <p className="success">Edit</p>
+                                                <p 
+                                                    className="success"
+                                                    onClick={() => editMusic(music.id)}
+                                                    >Edit</p>
                                                 <p 
                                                     className="failed"
                                                     onClick={() => deleteMusic(music.id)}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 // import Banner from '../Component/Banner'
 import Navbar from '../../Component/Navbar';
 import Cover from '../../assets/image/cover.png';
@@ -7,12 +7,19 @@ import {API} from '../../Config/Api';
 import ReactJkMusicPlayer from 'react-jinke-music-player'
 import 'react-jinke-music-player/assets/index.css'
 import './home.scss';
+import { UserContext } from '../../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
     const [musics, setMusics] = useState([])
     const [list, setList] = useState([])
     const [audioList,setAudioList] = useState([])
     const [play, setPlay] = useState(false)
+    const [showLogin, setShowLogin] = useState(false)
+    const [state, dispatch] = useContext(UserContext)
+    let navigate = useNavigate();
+
+
 
     const getMusics = async () => {
         try {
@@ -52,16 +59,29 @@ export default function Home() {
     }
 
     const onPlayHandler = (title, singer,music) => {
-        setPlay(!play);
-        setPlay(true)
-        const newAudioList= [...audioList]
-        const filterAudio = newAudioList.filter(audio => audio.name !== title )
-        filterAudio.unshift({
-            name: title,
-            singer: singer,
-            musicSrc:`http://localhost:5000/uploads/${music}`
-        })
-        setAudioList(filterAudio)
+        
+        // cek login
+        if(state.isLogin === false){
+            setShowLogin(!showLogin)
+        }
+        
+        // cek subscribe
+        if(state.user.length > 0) {
+            if(state.user[0].subscribe === false){
+                navigate('/pay')
+            }else {
+                setPlay(!play);
+                setPlay(true)
+                const newAudioList= [...audioList]
+                const filterAudio = newAudioList.filter(audio => audio.name !== title )
+                filterAudio.unshift({
+                    name: title,
+                    singer: singer,
+                    musicSrc:`http://localhost:5000/uploads/${music}`
+                })
+                setAudioList(filterAudio)        
+            }
+        }
     }
     useEffect(() => {
         getMusics()
@@ -69,7 +89,7 @@ export default function Home() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar showLogin={showLogin}/>
             <div className="banner">
                 <img class="banner-image" src={Banner} alt="banner" />
                 <div class="banner-content">

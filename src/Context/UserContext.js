@@ -15,6 +15,7 @@ const reducer = (state,action) => {
         case "REGISTER_SUCCESS":
             localStorage.setItem("token", payload.token);
             return {
+                ModalLogin: false,
                 isLogin: true,
                 user:[ 
                     {
@@ -31,6 +32,7 @@ const reducer = (state,action) => {
             localStorage.setItem("token", payload.token);
             return {
                 isLogin: true,
+                ModalLogin: false,
                 user: [ 
                     {
                         name: payload.fullName,
@@ -44,9 +46,11 @@ const reducer = (state,action) => {
         case "LOGOUT":
             localStorage.removeItem("token");
             return {
+                ModalLogin: false,
                 isLogin: false,
                 user: [],
             };
+            
         default:
             throw new Error();
     }
