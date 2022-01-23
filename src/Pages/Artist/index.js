@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import action from '../../assets/icon/action.png'
 import Navbar from '../../Component/Navbar';
 import { API } from '../../Config/Api';
@@ -8,6 +9,8 @@ export default function Artist() {
     const [active, setActive] = useState('')
     const [artists, setArtists] = useState([])
     const [change, setChange] = useState(false)
+    let navigate = useNavigate();
+
     
     const getArtists = async () => {
         try {
@@ -24,6 +27,10 @@ export default function Artist() {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const editArtist = async (id) => {
+        navigate(`/artist/${id}`)
     }
 
     useEffect(()=>{
@@ -63,7 +70,10 @@ export default function Artist() {
                                                 <div className="triangle-wrapper">
                                                     <div className="triangle"></div>
                                                 </div>
-                                                <p className="success">Edit</p>
+                                                <p 
+                                                    className="success"
+                                                    onClick={() => editArtist(artist.id)}
+                                                >Edit</p>
                                                 <p 
                                                     className="failed"
                                                     onClick={() => deleteArtist(artist.id)}
