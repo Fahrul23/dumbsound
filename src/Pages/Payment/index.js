@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Navbar from '../../Component/Navbar'
 import './payment.scss';
 import Input from '../../Component/Input';
@@ -6,21 +6,28 @@ import Button from '../../Component/Button';
 import InputFile from '../../Component/Input/InputFile';
 import { API } from '../../Config/Api';
 import { useNavigate } from 'react-router-dom';
+import successImg from '../../assets/image/success.jpg'
+import pendingImg from '../../assets/image/pending.png'
+import failedImg from '../../assets/image/failed.png'
+import StatusTransaction from '../../Component/StatusTransaction';
+import { UserContext } from '../../Context/UserContext';
 
 export default function Payment() {
-  const [preview, setPreview] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [userId, setUserId] = useState('')
-  const [attache, setAttache] = useState('')
-  let navigate = useNavigate();
+    const [preview, setPreview] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [userId, setUserId] = useState('')
+    const [attache, setAttache] = useState('')
+    const [state, dispatch] = useContext(UserContext)
+    const [transaction,setTransaction] = useState([])
+    let navigate = useNavigate();
 
-  const handleChange = (e) => {
-    if (e.target.type === "file") {
-        let url = URL.createObjectURL(e.target.files[0]);
-        setPreview(url);
-        setAttache(e.target.files)
-    }
-  };
+    const handleChange = (e) => {
+        if (e.target.type === "file") {
+            let url = URL.createObjectURL(e.target.files[0]);
+            setPreview(url);
+            setAttache(e.target.files)
+        }
+    };
 
   const handleSubmit = async (e) => {
     setLoading(true)
@@ -36,60 +43,114 @@ export default function Payment() {
             formData.set("attache", attache[0], attache[0].name)
             
             const response = await API.post('transaction',formData,config)
-            navigate('/')
+            getTransaction()
             console.log("response",response)
             setLoading(false)
         } catch (error) {
             setLoading(false)
             console.log(error.message)
         }
-  }
+    }
+
+    const getTransaction = async () => {
+        try {
+            let response = await API.get(`transaction`)
+            setTransaction(response.data.data)
+            console.log("transaction",transaction)
+        } catch (error) {
+            console.log(error)
+        }        
+    }
+
+    const payAgain = () => {
+        setTransaction([])
+    }
+
+    useEffect(() => {
+        getTransaction()
+        console.log("transaction",transaction)
+    },[])
+
     return (
         <div>
             <Navbar />
-            <div className="payment-wrapper">
-                <div className="payment">
-                    <h4>Premium</h4>
-                    <div className="desc">
-                        <p>Bayar sekarang dan nikmati streaming music yang kekinian dari </p>
-                        <p className="app-name">DUMB<span>SOUND</span></p>
-                    </div>
-                    <div className="contact">
-                        <p className="app-name">DUMB<span>SOUND</span></p>
-                        <p className="number">: 0981312323</p>
-                    </div>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-payment">
-                            <div className="form-input">
-                                <Input 
-                                  type="text" 
-                                  name="userId" 
-                                  placeholder="Input your account number" 
-                                  onChange={(e) => setUserId(e.target.value)}
-                                />
-                            </div>
-                            <InputFile 
-                              name="attache" 
-                              text="Attache proof of transfer"
-                              onChange={handleChange}
-                              />
-                            {preview && (
-                              <div className="img-preview">
-                                <img src={preview} alt="img-preview" />
-                              </div>        
-                            )}
-                            <div className="submit">
-                                <Button 
-                                    type="submit" 
-                                    className="btn btn-full btn-orange" 
-                                    text="Pay"
-                                    loading={loading}
-                                />
-                            </div>
+            {transaction.length <= 0 ? 
+                <div className="payment-wrapper">
+                    <div className="payment">
+                        <h4>Premium</h4>
+                        <div className="desc">
+                            <p>Bayar sekarang dan nikmati streaming music yang kekinian dari </p>
+                            <p className="app-name">DUMB<span>SOUND</span></p>
                         </div>
-                    </form>
+                        <div className="contact">
+                            <p className="app-name">DUMB<span>SOUND</span></p>
+                            <p className="number">: 0981312323</p>
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-payment">
+                                <div className="form-input">
+                                    <Input 
+                                    type="text" 
+                                    name="userId" 
+                                    placeholder="Input your account number" 
+                                    onChange={(e) => setUserId(e.target.value)}
+                                    />
+                                </div>
+                                <InputFile 
+                                name="attache" 
+                                text="Attache proof of transfer"
+                                onChange={handleChange}
+                                />
+                                {preview && (
+                                <div className="img-preview">
+                                    <img src={preview} alt="img-preview" />
+                                </div>        
+                                )}
+                                <div className="submit">
+                                    <Button 
+                                        type="submit" 
+                                        className="btn btn-full btn-orange" 
+                                        text="Pay"
+                                        loading={loading}
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+                :
+
+                transaction.status === "pending" 
+                    ?
+                    <StatusTransaction 
+                        title="Transaction Pending!!"
+                        image={pendingImg}
+                        status="pending"
+                        description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
+                    />
+                    :
+                    transaction.status === "success" ?
+                        <StatusTransaction 
+                            title="Transaction Success"
+                            image={successImg}
+                            status="success"
+                            description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
+                        />
+                        :
+                        <StatusTransaction 
+                            title="Transaction Failed"
+                            image={failedImg}
+                            status="failed"
+                            description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
+                            payAgain={payAgain}
+                        />
+                }
+            {/* <StatusTransaction 
+                title="Transaction Success!!"
+                image={successImg}
+                status="success"
+                description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
+            /> */}
         </div>
     )
 }

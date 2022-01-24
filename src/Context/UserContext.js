@@ -19,6 +19,7 @@ const reducer = (state,action) => {
                 isLogin: true,
                 user:[ 
                     {
+                        id: payload.id,
                         name: payload.fullName,
                         email: payload.email,
                         role: payload.role,
@@ -35,6 +36,7 @@ const reducer = (state,action) => {
                 ModalLogin: false,
                 user: [ 
                     {
+                        id: payload.id,
                         name: payload.fullName,
                         email: payload.email,
                         role: payload.role,
