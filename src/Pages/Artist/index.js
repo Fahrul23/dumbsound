@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 import action from '../../assets/icon/action.png'
 import Navbar from '../../Component/Navbar';
@@ -9,7 +10,8 @@ export default function Artist() {
     const [active, setActive] = useState('')
     const [artists, setArtists] = useState([])
     const [change, setChange] = useState(false)
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const alert = useAlert();
 
     
     const getArtists = async () => {
@@ -22,8 +24,10 @@ export default function Artist() {
     }
     const deleteArtist = async (id) => {
         try {
-            let response = await API.delete(`artist/${id}`)
+            await API.delete(`artist/${id}`)
             setChange(!change) 
+            alert.success("Delete Success");
+            
         } catch (error) {
             console.log(error)
         }

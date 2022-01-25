@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 import action from '../../assets/icon/action.png'
 import Navbar from '../../Component/Navbar';
@@ -10,7 +11,8 @@ export default function Music() {
     const [musics, setMusics] = useState([])
     const [change, setChange] = useState(false)
     let navigate = useNavigate();
-    
+    const alert = useAlert();
+
     const getMusic = async () => {
         try {
             let response = await API.get('musics')
@@ -22,14 +24,14 @@ export default function Music() {
 
     const deleteMusic = async (id) => {
         try {
-            let response = await API.delete(`music/${id}`)
-            setChange(!change) 
+            await API.delete(`music/${id}`)
+            setChange(!change)
+            alert.success("Delete Music Success!!");
         } catch (error) {
             console.log(error)
         }
     }
 
-    
     const editMusic = (id) => {
         navigate(`/music/${id}`)
     }

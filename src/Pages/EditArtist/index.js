@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
 import { useNavigate, useParams  } from 'react-router-dom';
 import Button from '../../Component/Button';
 import Input from '../../Component/Input';
@@ -15,6 +16,7 @@ export default function EditArtist() {
     const [loading, setLoading] = useState(false)
     let navigate = useNavigate();
     let params = useParams();
+    const alert = useAlert();
     const {id} = params
     
     const getArtist = async () => {
@@ -47,6 +49,7 @@ export default function EditArtist() {
             const response = await API.patch(`artist/${id}`,data,config)
             console.log("response",response)
             setLoading(false)
+            alert.success("Edit Artist Success!!");
             navigate('/artist')
         } catch (error) {
             setLoading(false)

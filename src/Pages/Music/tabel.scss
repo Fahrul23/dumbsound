@@ -1,5 +1,6 @@
 .tabel-wrapper {
     padding-top: 150px;
+    margin-bottom: 70px;
     padding-right: 120px;
     padding-left: 120px;
     box-sizing: border-box;
@@ -57,7 +58,7 @@
                     .option {
                         text-align: center;
                         border-radius: 10px;
-                        padding: 10px 20px;
+                        padding: 6px 20px;
                         background-color: #3A3A3A;
                         position: absolute;
                         top: 40px;
@@ -67,6 +68,7 @@
                         p {
                             cursor: pointer;
                             font-size: 14px;
+                            line-height: 23px;
                         }
                         .success {
                             color: #0ACF83;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../Component/Button';
 import Input from '../../Component/Input';
@@ -18,8 +19,10 @@ export default function EditMusic() {
     const [thumbnail, setThumbnail] = useState('')
     const [attache, setAttache] = useState('')
     const [audioPreview, setAudioPreview] = useState('')
+    const [change, setChange] = useState(false)
     let navigate = useNavigate();
     let params = useParams();
+    const alert = useAlert();
     const {id} = params
 
     const getMusic = async (req, res) => {
@@ -30,8 +33,7 @@ export default function EditMusic() {
             setAudioPreview(response.data.data.attache)
             setArtistId(response.data.data.Artist.id)
             setPreview(`http://localhost:5000/uploads/${response.data.data.thumbnail}`)
-            // setThumbnail(response.data.data.thumbnail)
-            // setAttache(response.data.data.attache)
+           
         } catch (error) {
             console.log()
         }
@@ -83,6 +85,8 @@ export default function EditMusic() {
             const response = await API.patch(`music/${id}/${artistId}`,formData,config)
             console.log("response",response)
             setLoading(false)
+            setChange(!change)
+            alert.success("Edit Music Success!!");
             navigate('/music')
         } catch (error) {
             setLoading(false)

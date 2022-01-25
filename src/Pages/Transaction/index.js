@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import action from '../../assets/icon/action.png'
 import { API } from '../../Config/Api';
-import { UserContext } from '../../Context/UserContext';
 import Navbar from '../../Component/Navbar/'
 import '../Music/tabel.scss'
+import { useAlert } from 'react-alert';
 
 export default function Transaction() {
     const [active, setActive] = useState('')
     const [transactions, setTransactions] = useState([])
     const [change, setChange] = useState(false)
-    const [state, dispatch] = useContext(UserContext)
-    
+    const alert = useAlert();
+
     const getTransaction = async () => {
         try {
             let response = await API.get('transactions')
@@ -39,8 +39,9 @@ export default function Transaction() {
                 endDate
             }
             
-            const response = await API.post(`transaction/${id}`,data,config)
+            await API.post(`transaction/${id}`,data,config)
             setChange(!change)
+            alert.success("Approve Success!!");
                         
         } catch (error) {
             console.log(error)
@@ -56,6 +57,7 @@ export default function Transaction() {
             }
             const response = await API.patch(`transaction/${id}`,config)
             setChange(!change)
+            alert.success("Cancel Success!!");
                         
         } catch (error) {
             console.log(error)
@@ -78,6 +80,7 @@ export default function Transaction() {
         console.log(transactions)
 
     },[change])
+
     return (
         <div>
             <Navbar theme="dark"/>    
