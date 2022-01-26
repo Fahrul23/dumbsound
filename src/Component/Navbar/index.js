@@ -100,10 +100,34 @@ export default function Navbar(props) {
                                 </div>
                                 <div className="item">
                                     <div className="icon">
+                                        <img src={music} alt="bil" />
+                                    </div>
+                                    <Link to="/music">
+                                        <p>List Music</p>
+                                    </Link>
+                                </div>
+                                <div className="item">
+                                    <div className="icon">
                                         <img src={people} alt="bil" />
                                     </div>
                                     <Link to="/add-artist">
                                         <p>Add Artist</p>
+                                    </Link>
+                                </div>
+                                <div className="item">
+                                    <div className="icon">
+                                        <img src={people} alt="bil" />
+                                    </div>
+                                    <Link to="/artist">
+                                        <p>List Artist</p>
+                                    </Link>
+                                </div>
+                                <div className="item">
+                                    <div className="icon">
+                                        <img src={Bill} alt="bil" />
+                                    </div>
+                                    <Link to="/transaction">
+                                        <p>Transactions</p>
                                     </Link>
                                 </div>
                             </div>

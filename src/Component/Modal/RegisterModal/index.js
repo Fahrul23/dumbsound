@@ -7,6 +7,7 @@ import Alert from '../../Alert';
 import { API } from '../../../Config/Api';
 import { UserContext } from '../../../Context/UserContext';
 import './register.scss'
+import { useAlert } from 'react-alert';
 
 const modalStyles = { 
     overlay :{
@@ -18,8 +19,8 @@ const modalStyles = {
         margin : 0,
         top: '40px',
         left: '33%',
+        height: '86%',
         width : '380px',
-        height : '490px',
         backgroundColor: '#1F1F1F',
         paddingLeft: '25px',
         paddingRight: '25px',
@@ -29,9 +30,11 @@ const modalStyles = {
 
 function RegisterModal(props) {
     const {isOpen, closeModal, showModalLogin, setChange} = props
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const [, dispatch] = useContext(UserContext)
+    const alert = useAlert();
+
 
     const [form, setForm] = useState({
         email: "",
@@ -71,21 +74,25 @@ function RegisterModal(props) {
                 })
                 closeModal()
                 setChange(true)
-            }else if(response.status === 400){
-                console.log(response)            
             }
 
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
             setMessage("Register Failed")
             setLoading(false)
         }
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setMessage('')
+        },4000)
+    },[message])
+
     return (
         <Modal isOpen={isOpen} onRequestClose={() => closeModal()} style={modalStyles}>
-            {message ? <Alert message={message}/> : <div></div>}
             <div className="login-wrapper">
+            {message ? <Alert message={message}/> : <div></div>}
                 <h2 style={{color: '#fff'}}>Register</h2>
                 <form onSubmit={handleSubmit}>
                     <Input 

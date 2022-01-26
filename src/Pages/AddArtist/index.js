@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import Button from '../../Component/Button';
 import Input from '../../Component/Input';
 import Navbar from '../../Component/Navbar';
@@ -13,8 +13,8 @@ export default function AddArtist() {
     const [type, setType] = useState('')
     const [startCareer, setStartCareer] = useState('')
     const [loading, setLoading] = useState(false)
-    let navigate = useNavigate();
-    
+    const alert = useAlert();
+
     const handleSubmit = async (e) => {
         setLoading(true)
         try {
@@ -33,7 +33,7 @@ export default function AddArtist() {
             const response = await API.post('artist',data,config)
             console.log("response",response)
             setLoading(false)
-            navigate('/artist')
+            alert.success("Add Artist Success!!");
         } catch (error) {
             setLoading(false)
             console.log(error.message)

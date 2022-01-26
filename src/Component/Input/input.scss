@@ -13,6 +13,18 @@
         border: 2px solid #D2D2D2;
         box-sizing: border-box;
     }
+    input[type="search"] {
+        border-radius: 50px;
+        position: relative;
+        padding-left: 40px;
+        padding-right: 10px;
+    }
+    i {
+        color: white;
+        position: absolute;
+        left: 15px;
+        top: 12px;
+    }
 }
 .file-input {
     position: relative;

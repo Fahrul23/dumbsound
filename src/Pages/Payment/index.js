@@ -5,21 +5,19 @@ import Input from '../../Component/Input';
 import Button from '../../Component/Button';
 import InputFile from '../../Component/Input/InputFile';
 import { API } from '../../Config/Api';
-import { useNavigate } from 'react-router-dom';
 import successImg from '../../assets/image/success.jpg'
 import pendingImg from '../../assets/image/pending.png'
 import failedImg from '../../assets/image/failed.png'
 import StatusTransaction from '../../Component/StatusTransaction';
-import { UserContext } from '../../Context/UserContext';
+import { useAlert } from 'react-alert';
 
 export default function Payment() {
     const [preview, setPreview] = useState('')
     const [loading, setLoading] = useState(false)
     const [userId, setUserId] = useState('')
     const [attache, setAttache] = useState('')
-    const [state, dispatch] = useContext(UserContext)
     const [transaction,setTransaction] = useState([])
-    let navigate = useNavigate();
+    const alert = useAlert();
 
     const handleChange = (e) => {
         if (e.target.type === "file") {
@@ -44,7 +42,7 @@ export default function Payment() {
             
             const response = await API.post('transaction',formData,config)
             getTransaction()
-            console.log("response",response)
+            alert.success("upload Success!!");
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -126,7 +124,7 @@ export default function Payment() {
                         title="Transaction Pending!!"
                         image={pendingImg}
                         status="pending"
-                        description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
+                        description= "if the transaction status is still pending for more than 1 hour, Please contact admin via Email to confirm payment by attaching proof of payment"
                     />
                     :
                     transaction.status === "success" ?
@@ -134,23 +132,17 @@ export default function Payment() {
                             title="Transaction Success"
                             image={successImg}
                             status="success"
-                            description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
+                            description= "Your payment has been confirmed and now you can play all the music you like"
                         />
                         :
                         <StatusTransaction 
                             title="Transaction Failed"
                             image={failedImg}
                             status="failed"
-                            description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
+                            description= "Sory, your transaction failed to be confirmed, please contact admin via email to reconfirm or make a payment again"
                             payAgain={payAgain}
                         />
                 }
-            {/* <StatusTransaction 
-                title="Transaction Success!!"
-                image={successImg}
-                status="success"
-                description= "jika transaksi belum masuk dalam waktu kurang dari 1 jam silahkan hubungi admin untuk melakukan konfirmasi pembayaran yang sudah dilakukan"
-            /> */}
         </div>
     )
 }

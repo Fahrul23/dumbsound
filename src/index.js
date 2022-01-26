@@ -5,13 +5,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserContextProvider } from './Context/UserContext';
 import { BrowserRouter } from 'react-router-dom';
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
+
+const options = {
+    timeout: 5000,
+    position: positions.TOP_RIGHT
+};
 
 ReactDOM.render(
   <React.StrictMode>
       <UserContextProvider>
         <BrowserRouter>
-            <App />
+            <Provider template={AlertTemplate} {...options}>
+                <App />
+            </Provider>
         </BrowserRouter>
       </UserContextProvider>
   </React.StrictMode>,

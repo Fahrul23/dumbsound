@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import Button from '../../Component/Button';
 import Input from '../../Component/Input';
 import InputFile from '../../Component/Input/InputFile';
@@ -18,7 +18,8 @@ export default function AddMusic() {
     const [thumbnail, setThumbnail] = useState('')
     const [attache, setAttache] = useState('')
     const [audioPreview, setAudioPreview] = useState('')
-    let navigate = useNavigate();
+
+    const alert = useAlert();
 
     const getArtists = async (req, res) => {
 
@@ -60,7 +61,7 @@ export default function AddMusic() {
             const response = await API.post('music',formData,config)
             console.log("response",response)
             setLoading(false)
-            navigate('/music')
+            alert.success("Add Music Success!!");
         } catch (error) {
             setLoading(false)
             console.log(error.message)

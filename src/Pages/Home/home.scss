@@ -79,24 +79,34 @@ body {
                 }
             }
             .card-body {
-                .title {
+                .card-title {
                     display: flex;
                     justify-content: space-between;
                     margin-bottom: 5px;
                     p {
-                        font-size: 18px;
                         font-weight: bold;
                         color: #fff;
                     }
+                    .title {
+                        font-size: 14px;
+                    }
+                    .year {
+                        font-size: 12;
+                    }
+                    
                 }
                 .content {
                     p {
-                        font-size: 14px;
-                        font-weight: 400;
+                        font-size: 12px;
+                        font-weight: 700;
                         color: #fff;
                     }
                 }
             }
+        }
+        .skeleton-wrapper {
+            display: flex;
+            gap: 10px;
         }
     }
 }
