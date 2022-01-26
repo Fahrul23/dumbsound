@@ -9,6 +9,8 @@ import 'react-jinke-music-player/assets/index.css'
 import './home.scss';
 import { UserContext } from '../../Context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import Input from '../../Component/Input'
+import Skeleton from '../../Component/Skeleton';
 
 export default function Home() {
     const [musics, setMusics] = useState([])
@@ -111,7 +113,7 @@ export default function Home() {
                         return (
                             <div 
                                 class="card-music" 
-                                onClick={() => onPlayHandler(music.title, music.Artist.name, music.attache) }
+                                onClick={() => onPlayHandler(music.title, music.name, music.attache) }
                             >
                                 <div class="card-header">
                                     <img src={`http://localhost:5000/uploads/${music.thumbnail}`} alt="cover" />
@@ -122,14 +124,20 @@ export default function Home() {
                                         <p className='year'>{music.year}</p>
                                     </div>
                                     <div class="content">
-                                        <p>{music.Artist.name}</p>
-                                        {/* <a href="#"></a> */}
+                                        <p>{music.name}</p>
                                     </div>
                                 </div>
                             </div>
                         )
                     })   
-                        : <div></div>
+                        : 
+                        <div className="skeleton-wrapper">
+                            <Skeleton />
+                            <Skeleton />
+                            <Skeleton />
+                            <Skeleton />
+                            <Skeleton />
+                        </div>
                     }
 
                     
