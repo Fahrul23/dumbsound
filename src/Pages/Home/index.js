@@ -19,6 +19,7 @@ export default function Home() {
     const [play, setPlay] = useState(false)
     const [showLogin, setShowLogin] = useState(false)
     const [state, dispatch] = useContext(UserContext)
+    const [keyword, setKeyword] = useState('')
     let navigate = useNavigate();
 
 
@@ -85,6 +86,11 @@ export default function Home() {
             }
         }
     }
+    const searchMusic = async (e) => {
+        setKeyword(e.target.value)
+        const response = await API.post('search-music', {keyword})
+        setMusics(response.data.data)
+    }
     useEffect(() => {
         getMusics()
     },[])
@@ -107,6 +113,13 @@ export default function Home() {
             <div class="music-wrapper">
                 <div class="head">
                     <h4>Hear and Feel</h4>
+                </div>
+                <div className="search-music">
+                    <Input 
+                        type="search"
+                        placeholder="search music by title"
+                        onChange={searchMusic}
+                    />
                 </div>
                 <div class="music-list">
                     {musics.length > 0 ? musics.map(music => {

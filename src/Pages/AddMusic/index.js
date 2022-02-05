@@ -59,12 +59,11 @@ export default function AddMusic() {
             formData.set("attache", attache[0], attache[0].name)
             
             const response = await API.post('music',formData,config)
-            console.log("response",response)
             setLoading(false)
             alert.success("Add Music Success!!");
         } catch (error) {
             setLoading(false)
-            console.log(error.message)
+            console.log(error)
         }
     } 
 

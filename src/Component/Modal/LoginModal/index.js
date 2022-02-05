@@ -47,7 +47,6 @@ function LoginModal(props) {
             ...form,
             [e.target.name] : e.target.value
         })
-        console.log(form)
     }
     const toRegister = () => {
         closeModal()
@@ -65,7 +64,6 @@ function LoginModal(props) {
             }
            
             let response = await API.post('/login', form, config)
-
             if(response.status === 200){
                 setLoading(false)        
                 dispatch({
@@ -86,7 +84,6 @@ function LoginModal(props) {
         setTimeout(() => {
             setMessage('')
         },4000)
-        console.log(state)
     },[message])
 
     return (

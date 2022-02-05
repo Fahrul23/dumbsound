@@ -35,7 +35,7 @@ export default function EditMusic() {
             setPreview(`http://localhost:5000/uploads/${response.data.data.thumbnail}`)
            
         } catch (error) {
-            console.log()
+            console.log(error)
         }
     }
 
@@ -80,17 +80,16 @@ export default function EditMusic() {
             if(attache !== ''){
                 formData.set("attache", attache[0], attache[0].name)
             }
-            console.log(formData)
-
+           
             const response = await API.patch(`music/${id}/${artistId}`,formData,config)
-            console.log("response",response)
+            
             setLoading(false)
             setChange(!change)
             alert.success("Edit Music Success!!");
             navigate('/music')
         } catch (error) {
             setLoading(false)
-            console.log(error.message)
+            console.log(error)
         }
     } 
 

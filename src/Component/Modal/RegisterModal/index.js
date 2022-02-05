@@ -46,7 +46,6 @@ function RegisterModal(props) {
             ...form,
             [e.target.name] : e.target.value
         })
-        console.log(form)
     }
 
     const toLogin = () => {
@@ -65,16 +64,14 @@ function RegisterModal(props) {
                 }
             }
             let response = await API.post('/register', form, config)
-            if(response.status === 201){
-                console.log(response.data.data)
-                setLoading(false)
-                dispatch({
-                    type: 'REGISTER_SUCCESS',
-                    payload: response.data.data
-                })
-                closeModal()
-                setChange(true)
-            }
+        
+            setLoading(false)
+            dispatch({
+                type: 'REGISTER_SUCCESS',
+                payload: response.data.data
+            })
+            closeModal()
+            setChange(true)
 
         } catch (error) {
             console.log(error)

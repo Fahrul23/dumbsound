@@ -63,7 +63,7 @@ export default function Music() {
                             return (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{music.Artist.name}</td>
+                                    <td>{music.name}</td>
                                     <td>{music.title}</td>
                                     <td>{music.year}</td>
                                     <td>
