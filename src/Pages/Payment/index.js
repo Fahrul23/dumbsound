@@ -46,7 +46,7 @@ export default function Payment() {
             setLoading(false)
         } catch (error) {
             setLoading(false)
-            console.log(error.message)
+            console.log(error)
         }
     }
 
@@ -54,7 +54,6 @@ export default function Payment() {
         try {
             let response = await API.get(`transaction`)
             setTransaction(response.data.data)
-            console.log("transaction",transaction)
         } catch (error) {
             console.log(error)
         }        
@@ -66,7 +65,6 @@ export default function Payment() {
 
     useEffect(() => {
         getTransaction()
-        console.log("transaction",transaction)
     },[])
 
     return (

@@ -31,12 +31,11 @@ export default function AddArtist() {
                 startCareer
             }
             const response = await API.post('artist',data,config)
-            console.log("response",response)
             setLoading(false)
             alert.success("Add Artist Success!!");
         } catch (error) {
             setLoading(false)
-            console.log(error.message)
+            console.log(error)
         }
     }
 

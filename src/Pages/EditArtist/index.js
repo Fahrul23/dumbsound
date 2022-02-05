@@ -47,13 +47,12 @@ export default function EditArtist() {
                 startCareer
             }
             const response = await API.patch(`artist/${id}`,data,config)
-            console.log("response",response)
             setLoading(false)
             alert.success("Edit Artist Success!!");
             navigate('/artist')
         } catch (error) {
             setLoading(false)
-            console.log(error.message)
+            console.log(error)
         }
     }
 

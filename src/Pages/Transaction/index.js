@@ -15,7 +15,6 @@ export default function Transaction() {
         try {
             let response = await API.get('transactions')
             setTransactions(response.data.data)
-            console.log(transactions)
         } catch (error) {
             console.log(error)
         }
@@ -77,7 +76,6 @@ export default function Transaction() {
 
     useEffect(()=>{
         getTransaction()
-        console.log(transactions)
 
     },[change])
 
