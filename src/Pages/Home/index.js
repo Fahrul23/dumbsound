@@ -80,7 +80,7 @@ export default function Home() {
                 filterAudio.unshift({
                     name: title,
                     singer: singer,
-                    musicSrc:`http://localhost:5000/uploads/${music}`
+                    musicSrc:`https://res.cloudinary.com/deerc6lof/raw/upload/v1644130844/${music}`
                 })
                 setAudioList(filterAudio)        
             }
@@ -129,7 +129,7 @@ export default function Home() {
                                 onClick={() => onPlayHandler(music.title, music.name, music.attache) }
                             >
                                 <div class="card-header">
-                                    <img src={`http://localhost:5000/uploads/${music.thumbnail}`} alt="cover" />
+                                    <img src={`https://res.cloudinary.com/deerc6lof/image/upload/v1644130844/${music.thumbnail}`} alt="cover" />
                                 </div>
                                 <div class="card-body">
                                     <div class="card-title">
