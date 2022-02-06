@@ -56,7 +56,6 @@ function App() {
 
     useEffect(() => {
         checkUser();
-        console.log(state)
     }, []);
 
 
