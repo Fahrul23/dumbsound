@@ -3,8 +3,8 @@ import axios from 'axios';
 export const API = axios.create({
 
     baseURL: 
-    // process.env.SERVER_URL ||
-    // "https://backend-dumbsound-v1.herokuapp.com/api/v1/" ||
+    process.env.SERVER_URL ||
+    "https://backend-dumbsound-v1.herokuapp.com/api/v1/" ||
     "http://localhost:5000/api/v1/"
 });
 
