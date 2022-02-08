@@ -53,7 +53,10 @@ export default function Payment() {
     const getTransaction = async () => {
         try {
             let response = await API.get(`transaction`)
-            setTransaction(response.data.data)
+            if(response.data.data !== null) {
+                setTransaction(response.data.data)
+            }
+            console.log("response transaction", response.data.data)
         } catch (error) {
             console.log(error)
         }        
@@ -65,6 +68,7 @@ export default function Payment() {
 
     useEffect(() => {
         getTransaction()
+        console.log("transaction ====", transaction)
     },[])
 
     return (
