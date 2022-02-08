@@ -103,10 +103,10 @@ export default function Transaction() {
                             return (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{transaction.User.fullName}</td>
+                                    <td>{transaction.user.fullName}</td>
                                     <td>{transaction.attache}</td>
                                     <td>{reamingActive(transaction.startDate, transaction.endDate)} / hari</td>             
-                                    {transaction.User.subscribe === false ? 
+                                    {transaction.user.subscribe === false ? 
                                         <td className="failed">Non Active</td>
                                         :
                                         <td className="success">Active</td>

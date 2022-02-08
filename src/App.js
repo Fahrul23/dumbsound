@@ -25,6 +25,7 @@ function App() {
                 navigate("/")
             }
         }
+        console.clear();
     }, [state])
 
     const checkUser = async () => {

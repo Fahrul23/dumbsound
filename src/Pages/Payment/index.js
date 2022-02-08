@@ -10,13 +10,14 @@ import pendingImg from '../../assets/image/pending.png'
 import failedImg from '../../assets/image/failed.png'
 import StatusTransaction from '../../Component/StatusTransaction';
 import { useAlert } from 'react-alert';
+import { UserContext } from '../../Context/UserContext';
 
 export default function Payment() {
     const [preview, setPreview] = useState('')
     const [loading, setLoading] = useState(false)
-    const [userId, setUserId] = useState('')
     const [attache, setAttache] = useState('')
     const [transaction,setTransaction] = useState([])
+    const [state, dispatch] = useContext(UserContext)
     const alert = useAlert();
 
     const handleChange = (e) => {
@@ -37,7 +38,7 @@ export default function Payment() {
                 }
             }
             const formData = new FormData()
-            formData.set("userId",userId)
+            formData.set("userId", state.user[0].id)
             formData.set("attache", attache[0], attache[0].name)
             
             const response = await API.post('transaction',formData,config)
@@ -68,7 +69,6 @@ export default function Payment() {
 
     useEffect(() => {
         getTransaction()
-        console.log("transaction ====", transaction)
     },[])
 
     return (
@@ -88,14 +88,6 @@ export default function Payment() {
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="form-payment">
-                                <div className="form-input">
-                                    <Input 
-                                    type="text" 
-                                    name="userId" 
-                                    placeholder="Input your account number" 
-                                    onChange={(e) => setUserId(e.target.value)}
-                                    />
-                                </div>
                                 <InputFile 
                                 name="attache" 
                                 text="Attache proof of transfer"
