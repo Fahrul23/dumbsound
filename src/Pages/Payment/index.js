@@ -37,8 +37,9 @@ export default function Payment() {
                   "Content-type": "multipart/form-data"
                 }
             }
+            const id = parseInt(state.user[0].id)
             const formData = new FormData()
-            formData.set("userId", state.user[0].id)
+            formData.set("userId", id)
             formData.set("attache", attache[0], attache[0].name)
             
             const response = await API.post('transaction',formData,config)
