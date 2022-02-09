@@ -55,3 +55,17 @@ $ npm run dev or yarn dev
 Open (http://localhost:3000) to view it in the browser
 
 ```
+
+# Demo User Account
+
+```
+# Admin
+email : dumbways@gmail.com
+password : dumbways123
+
+
+# Member
+email : fahrul@gmail.com
+password : 12345
+
+```
